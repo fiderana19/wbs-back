@@ -135,7 +135,7 @@ export class TransactionService {
   async delete(id: string): Promise<Transaction> {
     await this.detailTransationModel.deleteMany({ id }).exec();
 
-    return await this.transactionModel.findByIdAndRemove(id);
+    return await this.transactionModel.findByIdAndDelete(id);
   }
 
 }

@@ -6,16 +6,16 @@ import { ClientModule } from './client/client.module';
 import { TransactionModule } from './transaction/transaction.module';
 import { ProductModule } from './product/product.module';
 import { DetailtransactionModule } from './detailtransaction/detailtransaction.module';
-import { MailerModule } from './mailer/mailer.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
-    MongooseModule.forRoot('mongodb://localhost/caissewbs'),
+    MongooseModule.forRoot('mongodb://localhost/gcaissewbs'),
     ClientModule,
     TransactionModule,
     ProductModule,
     DetailtransactionModule,
-    MailerModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],

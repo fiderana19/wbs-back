@@ -41,6 +41,6 @@ export class ClientService {
   async delete(id: string): Promise<Client> {
     await this.transactionModel.deleteMany({ id }).exec();
 
-    return this.clientModel.findByIdAndRemove(id);
+    return this.clientModel.findByIdAndDelete(id);
   }
 }
