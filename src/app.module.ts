@@ -7,10 +7,15 @@ import { TransactionModule } from './transaction/transaction.module';
 import { ProductModule } from './product/product.module';
 import { DetailtransactionModule } from './detailtransaction/detailtransaction.module';
 import { AuthModule } from './auth/auth.module';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
-    MongooseModule.forRoot('mongodb://localhost/gcaissewbs'),
+    ConfigModule.forRoot({
+      isGlobal: true,
+      envFilePath: '.env',
+    }),
+    MongooseModule.forRoot(process.env.DB_URI),
     ClientModule,
     TransactionModule,
     ProductModule,
