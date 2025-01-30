@@ -16,33 +16,36 @@ export class AuthService {
         private jwtService: JwtService,
     ) {}
 
+    // Getting all user
     async getAllUser() {
         return await this.userModel.find().exec();
     }
 
+    // Creating user
     async createUser(createUserData: CreateUserDto) {
-        const key = generateRandomRef();
+        //Generating random ref for usrid and hashing the pass
+        const usr_id = generateRandomRef();
         const hashedPassword = await bcrypt.hash(createUserData.password, 10);
 
         await this.userModel.create({
-            usrid: key,
+            usrid: usr_id,
             username: createUserData.username,
             password: hashedPassword
         })
 
-        return key;
+        return usr_id;
     }
 
+    // Login user
     async login(loginData: LoginDto) {
         const { usrid, password } = loginData;
+        //Checking if user didn't exist
         const user = await this.userModel.findOne({ usrid });
-
         if(!user) {
-            throw new UnauthorizedException("User not found !");
+            throw new UnauthorizedException("User not found");
         }
-
+        //Matching password
         const isPasswordMatched = await bcrypt.compare(password,user.password);
-
         if(!isPasswordMatched) {
             throw new UnauthorizedException("Invalid password");
         }

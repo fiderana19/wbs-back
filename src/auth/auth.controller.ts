@@ -10,17 +10,20 @@ export class AuthController {
         private authService: AuthService,
     ) {}
 
+    // Getting all the user
     @Get('/all')
     @UseGuards(AuthGuard())
     async getAllUser() {
         return await this.authService.getAllUser();
     }
 
+    // Creating user
     @Post('/create')
     async createUser(@Body() createUserDto: CreateUserDto) {        
         return await this.authService.createUser(createUserDto);
     }
 
+    // Login user
     @Post('/login')
     async loginUser(@Body() loginDto: LoginDto) {
         return await this.authService.login(loginDto);
