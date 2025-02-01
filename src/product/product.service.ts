@@ -9,8 +9,9 @@ import { Product } from 'src/schema/product.schema';
 export class ProductService {
   constructor(
     @InjectModel(Product.name) private productModel: Model<Product>,
-    @InjectModel(DetailTransaction.name) private detailTransationModel: Model<DetailTransaction>,
-    ) {}
+    @InjectModel(DetailTransaction.name)
+    private detailTransationModel: Model<DetailTransaction>,
+  ) {}
 
   async getAll(): Promise<Product[]> {
     return await this.productModel.find().exec();

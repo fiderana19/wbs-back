@@ -19,10 +19,10 @@ export class DetailTransaction {
   @Prop({ required: true })
   montant_total: number;
 
-  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: "Product" })
+  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Product' })
   product: Product;
 
-  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: "Transaction" })
+  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Transaction' })
   transaction: Transaction;
 }
 

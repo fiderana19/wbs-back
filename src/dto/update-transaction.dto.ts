@@ -1,3 +1,3 @@
 export class UpdateTransactionDto {
-    readonly date_transaction?: Date;
-  }
+  readonly date_transaction?: Date;
+}

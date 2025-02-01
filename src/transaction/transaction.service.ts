@@ -12,7 +12,7 @@ export class TransactionService {
     @InjectModel(Transaction.name) private transactionModel: Model<Transaction>,
     @InjectModel(DetailTransaction.name)
     private detailTransationModel: Model<DetailTransaction>,
-    ) {}
+  ) {}
 
   async getAll(): Promise<Transaction[]> {
     return await this.transactionModel.find().exec();
@@ -25,7 +25,10 @@ export class TransactionService {
   async getTransactionWithClient(): Promise<any> {
     const transactionsWithClient = await this.transactionModel
       .find()
-      .populate('client', 'nom_client adresse_client mail_client telephone_client')
+      .populate(
+        'client',
+        'nom_client adresse_client mail_client telephone_client',
+      )
       .exec();
 
     return await transactionsWithClient.map((transaction) => ({
@@ -34,16 +37,23 @@ export class TransactionService {
       ref: transaction.ref,
       montant_transaction: transaction.montant_transaction,
       nom_client: transaction.client ? transaction.client.nom_client : '',
-      adresse_client: transaction.client ? transaction.client.adresse_client : '',
+      adresse_client: transaction.client
+        ? transaction.client.adresse_client
+        : '',
       mail_client: transaction.client ? transaction.client.mail_client : '',
-      telephone_client: transaction.client ? transaction.client.telephone_client : '',
+      telephone_client: transaction.client
+        ? transaction.client.telephone_client
+        : '',
     }));
   }
 
   async getTransactionWithClientFacture(id: string): Promise<any> {
     const transactionsWithClient = await this.transactionModel
       .find({ _id: id })
-      .populate('client', 'nom_client adresse_client mail_client telephone_client')
+      .populate(
+        'client',
+        'nom_client adresse_client mail_client telephone_client',
+      )
       .exec();
 
     return await transactionsWithClient.map((transaction) => ({
@@ -52,9 +62,13 @@ export class TransactionService {
       ref: transaction.ref,
       montant_transaction: transaction.montant_transaction,
       nom_client: transaction.client ? transaction.client.nom_client : '',
-      adresse_client: transaction.client ? transaction.client.adresse_client : '',
+      adresse_client: transaction.client
+        ? transaction.client.adresse_client
+        : '',
       mail_client: transaction.client ? transaction.client.mail_client : '',
-      telephone_client: transaction.client ? transaction.client.telephone_client : '',
+      telephone_client: transaction.client
+        ? transaction.client.telephone_client
+        : '',
     }));
   }
 
@@ -137,5 +151,4 @@ export class TransactionService {
 
     return await this.transactionModel.findByIdAndDelete(id);
   }
-
 }

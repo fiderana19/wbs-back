@@ -13,7 +13,7 @@ export class DetailtransactionService {
     private detailTransationModel: Model<DetailTransaction>,
     @InjectModel(Product.name) private productModel: Model<Product>,
     @InjectModel(Transaction.name) private transactionModel: Model<Transaction>,
-    ) {}
+  ) {}
 
   async getAll(): Promise<any> {
     const details = await this.detailTransationModel
@@ -64,10 +64,11 @@ export class DetailtransactionService {
       throw new BadRequestException("Le niveau de stock n'est pas suffisant");
     }
     await product.save();
-   
+
     //Automatic calcul of amount
     const montant_brut = product.pu * createDetailTransactionDto.quantite;
-    const montant_total = montant_brut - (montant_brut * createDetailTransactionDto.remise) / 100;
+    const montant_total =
+      montant_brut - (montant_brut * createDetailTransactionDto.remise) / 100;
 
     //Updating the amount level
     if (!transaction) {

@@ -15,7 +15,7 @@ export class Transaction {
   @Prop({ required: true })
   montant_transaction: number;
 
-  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: "Client", required: true })
+  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Client', required: true })
   client: Client;
 }
 

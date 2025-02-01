@@ -7,8 +7,10 @@ import { Transaction } from 'src/schema/transaction.schema';
 
 @Injectable()
 export class ClientService {
-  constructor(@InjectModel(Client.name) private clientModel: Model<Client>,
-  @InjectModel(Transaction.name) private transactionModel: Model<Transaction>) {}
+  constructor(
+    @InjectModel(Client.name) private clientModel: Model<Client>,
+    @InjectModel(Transaction.name) private transactionModel: Model<Transaction>,
+  ) {}
 
   async getAll(): Promise<Client[]> {
     return await this.clientModel.find().exec();
