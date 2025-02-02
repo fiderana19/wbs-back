@@ -1,13 +1,4 @@
-import { Controller } from '@nestjs/common';
-import {
-  Body,
-  Delete,
-  Get,
-  Param,
-  Patch,
-  Post,
-  UseGuards,
-} from '@nestjs/common/decorators';
+import { Body, Controller, Delete, Get, Param, Patch, Post, UseGuards } from '@nestjs/common';
 import { ClientService } from './client.service';
 import { CreateClientDto } from 'src/dto/create-client.dto';
 import { UpdateClientDto } from 'src/dto/update-client.dto';

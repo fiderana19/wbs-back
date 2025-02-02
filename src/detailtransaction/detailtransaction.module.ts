@@ -8,9 +8,12 @@ import {
 } from 'src/schema/detailtransaction.schema';
 import { Product, ProductSchema } from 'src/schema/product.schema';
 import { Transaction, TransactionSchema } from 'src/schema/transaction.schema';
+import { JwtService } from '@nestjs/jwt';
+import { AuthModule } from 'src/auth/auth.module';
 
 @Module({
   imports: [
+    AuthModule,
     MongooseModule.forFeature([
       { name: DetailTransaction.name, schema: DetailTransactionSchema },
       { name: Product.name, schema: ProductSchema },
@@ -18,6 +21,6 @@ import { Transaction, TransactionSchema } from 'src/schema/transaction.schema';
     ]),
   ],
   controllers: [DetailtransactionController],
-  providers: [DetailtransactionService],
+  providers: [DetailtransactionService, JwtService],
 })
 export class DetailtransactionModule {}

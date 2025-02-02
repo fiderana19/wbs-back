@@ -1,14 +1,5 @@
-import { Controller } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post, UseGuards } from '@nestjs/common';
 import { ProductService } from './product.service';
-import {
-  Get,
-  Post,
-  Delete,
-  Body,
-  Param,
-  Patch,
-  UseGuards,
-} from '@nestjs/common/decorators';
 import { CreateProductDto } from 'src/dto/create-product.dto';
 import { UpdateProductDto } from 'src/dto/update-product.dto';
 import { AuthGuard } from '@nestjs/passport';
