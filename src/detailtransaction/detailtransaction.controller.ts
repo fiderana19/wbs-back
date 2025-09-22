@@ -1,4 +1,13 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post, UseGuards } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Patch,
+  Post,
+  UseGuards,
+} from '@nestjs/common';
 import { DetailtransactionService } from './detailtransaction.service';
 import { CreateDetailTransactionDto } from 'src/dto/create-detailtransaction.dto';
 import { AuthGuard } from '@nestjs/passport';
