@@ -55,13 +55,8 @@ export class DetailtransactionService {
       createDetailTransactionDto.transaction,
     );
 
-    //Updating the stock level
     if (!product) {
       throw new Error('Product not found');
-    }
-    product.stock -= createDetailTransactionDto.quantite;
-    if (product.stock <= 0) {
-      throw new BadRequestException("Le niveau de stock n'est pas suffisant");
     }
     await product.save();
 

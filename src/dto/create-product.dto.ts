@@ -9,7 +9,4 @@ export class CreateProductDto {
 
   @IsNotEmpty()
   pu: number;
-
-  @IsNotEmpty()
-  stock: number;
 }
