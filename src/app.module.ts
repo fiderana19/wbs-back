@@ -9,7 +9,8 @@ import { DetailtransactionModule } from './detailtransaction/detailtransaction.m
 import { AuthModule } from './auth/auth.module';
 import { ConfigModule } from '@nestjs/config';
 import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
-import { APP_GUARD } from '@nestjs/core';
+import { APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
+import { CacheInterceptor, CacheModule } from '@nestjs/cache-manager';
 
 @Module({
   imports: [
@@ -18,6 +19,10 @@ import { APP_GUARD } from '@nestjs/core';
       envFilePath: '.env',
     }),
     MongooseModule.forRoot(process.env.DB_URI),
+    CacheModule.register({
+      ttl: 1000 * 60,
+      isGlobal: true,
+    }),
     ThrottlerModule.forRoot({
       throttlers: [
         {
@@ -38,7 +43,11 @@ import { APP_GUARD } from '@nestjs/core';
     ,{
     provide: APP_GUARD,
     useClass: ThrottlerGuard
-  }
+    },
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: CacheInterceptor
+    }
   ],
 })
 export class AppModule {}
