@@ -56,7 +56,7 @@ export class DetailtransactionService {
     );
 
     if (!product) {
-      throw new Error('Product not found');
+      throw new Error("Produit introuvable !");
     }
     await product.save();
 
@@ -67,7 +67,7 @@ export class DetailtransactionService {
 
     //Updating the amount level
     if (!transaction) {
-      throw new Error('Transaction not found');
+      throw new Error("Transaction introuvable !");
     }
     transaction.montant_transaction += montant_total;
     await transaction.save();

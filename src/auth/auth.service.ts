@@ -39,12 +39,12 @@ export class AuthService {
     //Checking if user didn't exist
     const user = await this.userModel.findOne({ email });
     if (!user) {
-      throw new UnauthorizedException('User not found');
+      throw new UnauthorizedException("Cet utilisateur n'existe pas !");
     }
     //Matching password
     const isPasswordMatched = await bcrypt.compare(password, user.password);
     if (!isPasswordMatched) {
-      throw new UnauthorizedException('Invalid password');
+      throw new UnauthorizedException('Mot de passe incorrect !');
     }
 
     const access_token = await this.jwtService.sign({
