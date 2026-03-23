@@ -4,7 +4,6 @@ import { Model } from 'mongoose';
 import { CreateUserDto } from 'src/dto/create-user.dto';
 import { LoginDto } from 'src/dto/login.dto';
 import { User } from 'src/schema/user.schema';
-import { generateRandomRef } from 'src/utils/generateRandom';
 import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
 
@@ -24,23 +23,21 @@ export class AuthService {
   // Creating user
   async createUser(createUserData: CreateUserDto) {
     //Generating random ref for usrid and hashing the pass
-    const usr_id = generateRandomRef();
     const hashedPassword = await bcrypt.hash(createUserData.password, 10);
 
-    await this.userModel.create({
-      usrid: usr_id,
-      username: createUserData.username,
+    const response = await this.userModel.create({
+      email: createUserData.email,
       password: hashedPassword,
     });
 
-    return usr_id;
+    return response;
   }
 
   // Login user
   async login(loginData: LoginDto) {
-    const { usrid, password } = loginData;
+    const { email, password } = loginData;
     //Checking if user didn't exist
-    const user = await this.userModel.findOne({ usrid });
+    const user = await this.userModel.findOne({ email });
     if (!user) {
       throw new UnauthorizedException('User not found');
     }
